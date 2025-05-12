@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import InterviewCard from "@/components/InterviewCard";
 
-import { getCurrentUser } from "@/lib/actions/auth.action";
+import { getCurrentUser, signOut } from "@/lib/actions/auth.action";
 import {
   getInterviewsByUserId,
   getLatestInterviews,
@@ -21,8 +22,22 @@ async function Home() {
   const hasPastInterviews = userInterviews?.length! > 0;
   const hasUpcomingInterviews = allInterview?.length! > 0;
 
+  async function handleSignOut() {
+    "use server";
+    await signOut();
+    redirect("/sign-in");
+  }
+
   return (
     <>
+      <div className="flex justify-end items-center w-full mb-4">
+        <form action={handleSignOut}>
+          <Button type="submit" className="btn-secondary">
+            Sign Out
+          </Button>
+        </form>
+      </div>
+
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
           <h2>Get Interview-Ready with AI-Powered Practice & Feedback</h2>
