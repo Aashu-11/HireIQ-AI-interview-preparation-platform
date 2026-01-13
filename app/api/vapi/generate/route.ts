@@ -1,5 +1,5 @@
 import { generateObject } from "ai";
-import { google } from "@ai-sdk/google";
+import { groq } from "@ai-sdk/groq";
 import { z } from "zod";
 
 import { db } from "@/firebase/admin";
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
   try {
     const { object } = await generateObject({
-      model: google("gemini-2.0-flash-001"),
+      model: groq("llama-3.1-8b-instant"),
       schema: z.object({
         questions: z.array(z.string().min(1)).min(1),
       }),
