@@ -161,27 +161,27 @@ export const feedbackSchema = z.object({
   totalScore: z.number(),
   categoryScores: z.tuple([
     z.object({
-      name: z.literal("Communication Skills"),
+      name: z.enum(["Communication Skills"]),
       score: z.number(),
       comment: z.string(),
     }),
     z.object({
-      name: z.literal("Technical Knowledge"),
+      name: z.enum(["Technical Knowledge"]),
       score: z.number(),
       comment: z.string(),
     }),
     z.object({
-      name: z.literal("Problem Solving"),
+      name: z.enum(["Problem Solving", "Problem-Solving"]),
       score: z.number(),
       comment: z.string(),
     }),
     z.object({
-      name: z.literal("Cultural Fit"),
+      name: z.enum(["Cultural Fit", "Cultural & Role Fit"]),
       score: z.number(),
       comment: z.string(),
     }),
     z.object({
-      name: z.literal("Confidence and Clarity"),
+      name: z.enum(["Confidence and Clarity", "Confidence & Clarity"]),
       score: z.number(),
       comment: z.string(),
     }),
