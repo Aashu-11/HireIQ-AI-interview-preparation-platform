@@ -1,7 +1,7 @@
 "use server";
 
 import { generateObject } from "ai";
-import { google } from "@ai-sdk/google";
+import { groq } from "@ai-sdk/groq";
 
 import { db } from "@/firebase/admin";
 import { dummyInterviews, feedbackSchema } from "@/constants";
@@ -18,7 +18,7 @@ export async function createFeedback(params: CreateFeedbackParams) {
       .join("");
 
     const { object } = await generateObject({
-      model: google("gemini-2.0-flash-001", {
+      model: groq("llama-3.1-8b-instant", {
         structuredOutputs: false,
       }),
       schema: feedbackSchema,
