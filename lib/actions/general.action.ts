@@ -38,11 +38,22 @@ export async function createFeedback(params: CreateFeedbackParams) {
         "You are a professional interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories",
     });
 
+    const nameMap: Record<string, string> = {
+      "Problem-Solving": "Problem Solving",
+      "Cultural & Role Fit": "Cultural Fit",
+      "Confidence & Clarity": "Confidence and Clarity",
+    };
+
+    const normalizedCategoryScores = object.categoryScores.map((category) => ({
+      ...category,
+      name: nameMap[category.name] || category.name,
+    }));
+
     const feedback = {
       interviewId: interviewId,
       userId: userId,
       totalScore: object.totalScore,
-      categoryScores: object.categoryScores,
+      categoryScores: normalizedCategoryScores,
       strengths: object.strengths,
       areasForImprovement: object.areasForImprovement,
       finalAssessment: object.finalAssessment,
