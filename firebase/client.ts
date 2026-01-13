@@ -1,5 +1,5 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
+import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -8,17 +8,17 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBmHf3vAOq8fXUTL-oqn3u-KGg51waLIuU",
-  authDomain: "aiinterviewplatform-3e53e.firebaseapp.com",
-  projectId: "aiinterviewplatform-3e53e",
-  storageBucket: "aiinterviewplatform-3e53e.firebasestorage.app",
-  messagingSenderId: "514047005879",
-  appId: "1:514047005879:web:a6d783c0c5f043fc932932",
-  measurementId: "G-JBB5B6GFW6"
+  apiKey: "AIzaSyCzU_ijLEQnDI25SzV5zYD47i4FP-FmthI",
+  authDomain: "hireiq-2d601.firebaseapp.com",
+  projectId: "hireiq-2d601",
+  storageBucket: "hireiq-2d601.firebasestorage.app",
+  messagingSenderId: "1080071096790",
+  appId: "1:1080071096790:web:7a04d9dfda1950ffd1fc77",
+  measurementId: "G-YSVS9H6MV3",
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-// const analytics = getAnalytics(app);
+const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
