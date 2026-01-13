@@ -110,14 +110,14 @@ export async function getLatestInterviews(
 ): Promise<Interview[] | null> {
   const { userId, limit = 20 } = params;
 
-  if (!userId) return [];
+  if (!userId) return dummyInterviews.slice(0, limit);
 
   try {
     const interviews = await db
       .collection("interviews")
       .where("finalized", "==", true)
       .orderBy("createdAt", "desc")
-      .limit(limit + 10)
+      .limit(limit)
       .get();
 
     const filtered = interviews.docs
@@ -125,14 +125,10 @@ export async function getLatestInterviews(
         id: doc.id,
         ...doc.data(),
       }))
-      .filter((interview) => interview.userId !== userId)
-      .slice(0, limit);
+      .filter((interview) => interview.userId !== userId);
 
-    if (filtered.length > 0) {
-      return filtered as Interview[];
-    }
-
-    return dummyInterviews.slice(0, limit);
+    const merged = [...filtered, ...dummyInterviews].slice(0, limit);
+    return merged as Interview[];
   } catch (error) {
     console.error("Error fetching latest interviews:", error);
     return dummyInterviews.slice(0, limit);
